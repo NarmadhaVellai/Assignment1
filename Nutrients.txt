@@ -1,0 +1,324 @@
+Nutrition in food can be broken down into proteins, fats, and carbohydrates. Implement the following classes about food and nutrition to complete this challenge:
+
+
+
+1. abstract class Food having the following properties
+
+double proteins
+double fats
+double carbs
+double tastyScore
+void getMacroNutrients [Abstract Method]
+2. class Egg which extends class Food and has the following properties:
+
+Constructor to initialize the attributes (proteins, fats, and carbs) in the same order.
+int tastyScore = 7
+String type = "non-vegetarian"
+void getMacroNutrients => prints("An egg has [this.proteins] gms of protein, [this.fats] gms of fats and [this.carbs] gms of carbohydrates.")
+3. class Bread which extends class Food and has the following properties:
+
+Constructor to initialize the attributes (proteins, fats, and carbs) in the same order.
+int tastyScore = 8
+String type = "vegetarian"
+void getMacroNutrients => prints(" A slice of bread has [this.proteins] gms of protein, [this.fats] gms of fats and [this.carbs] gms of carbohydrates.")
+ 
+
+Note: You do not have to worry about input handling, code stub does that
+
+Input Format For Custom Testing
+The first line contains an integer, n, denoting the number of food items
+
+Every food item take input in the next 4 lines where, the first line is the name of the food and the next three lines are method calls (getType, getTaste and getMacros) in random order.
+
+Sample Case 0
+Sample Input
+
+1
+Bread
+getType
+getMacros
+getTaste
+Sample Output
+
+Bread is vegetarian
+A slice of bread has 4.0 gms of protein, 1.1 gms of fats and 13.8 gms of carbohydrates.
+Taste: 8
+Sample Case 1
+Sample Input
+
+1
+Egg
+getMacros
+getTaste
+getType
+Sample Output
+
+An egg has 6.3 gms of protein, 5.3 gms of fats and 0.6 gms of carbohydrates.
+Taste: 7
+Egg is non-vegetarian
+  
+
+
+ANSWERS:
+
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+ abstract class Food{
+    double proteins;
+    double fats;
+    double carbs;
+    int tastyScore;
+     void getMacroNutrients(){}
+ }
+class Bread extends Food{
+    String type;
+    public Bread(double proteins, double fats, double carbs){
+        this.proteins=proteins;
+        this.fats=fats;
+        this.carbs=carbs;
+        this.tastyScore=8;
+        this.type="vegetarian";
+    }
+    void getMacroNutrients()
+    {
+        System.out.println("A slice of bread has "+String.valueOf(this.proteins)+" gms of protein, "+String.valueOf(this.fats)+ " gms of fats and "+String.valueOf(this.carbs)+" gms of carbohydrates.");
+    }
+}
+class Egg extends Food{
+    String type;
+    public Egg(double proteins,double fats,double carbs){
+        this.proteins=proteins;
+        this.fats=fats;
+        this.carbs=carbs;
+        this.tastyScore=7;
+        this.type="non-vegetarian";
+    }
+    void getMacroNutrients()
+    {
+        System.out.println("An egg has "+String.valueOf(this.proteins)+" gms of protein, "+String.valueOf(this.fats)+ " gms of fats and "+String.valueOf(this.carbs)+" gms of carbohydrates.");
+    }
+}
+
+public class Solution {
+
+    public static void main(String args[] ) throws Exception {
+
+        Scanner sc = new Scanner(System.in);
+
+        int cnt = Integer.parseInt(sc.nextLine());
+
+        for (int i = 0; i < cnt; i++) {
+
+            String name = sc.nextLine();
+
+​
+
+            if(name.equals("Bread")) {
+
+                Bread breadObj = new Bread(4, 1.1, 13.8);
+
+                for(int j = 0; j < 3; j++) {
+
+                    String command = sc.nextLine();
+
+                    if(command.equals("getMacros")) {
+
+                        breadObj.getMacroNutrients();
+
+                    } else if(command.equals("getTaste")) {
+
+                        System.out.println("Taste: " + breadObj.tastyScore);
+
+                    } else if(command.equals("getType")) {
+
+                        System.out.println("Bread is " + breadObj.type);
+
+                    }
+
+                }
+
+            } else if (name.equals("Egg")) {
+
+                Egg eggObj = new Egg(6.3, 5.3, 0.6);
+
+                for(int j = 0; j < 3; j++) {
+
+                    String command = sc.nextLine();
+
+                    if(command.equals("getMacros")) {
+
+                        eggObj.getMacroNutrients();
+
+                    } else if(command.equals("getTaste")) {
+
+                        System.out.println("Taste: " + eggObj.tastyScore);
+
+                    } else if(command.equals("getType")) {
+
+                        System.out.println("Egg is " + eggObj.type);
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
+Test against custom input
+Run Code
+Status: Compiled successfully. All test cases passed!
+
+Tip: Debug your code against custom input
+Testcase 1: Success
+
+Input [Download]
+
+1
+Bread
+getType
+getMacros
+getTaste
+Your Output
+
+Bread is vegetarian
+A slice of bread has 4.0 gms of protein, 1.1 gms of fats and 13.8 gms of carbohydrates.
+Taste: 8
+Expected Output [Download]
+
+Bread is vegetarian
+A slice of bread has 4.0 gms of protein, 1.1 gms of fats and 13.8 gms of carbohydrates.
+Taste: 8
+Testcase 2: Success
+
+Input [Download]
+
+1
+Egg
+getMacros
+getTaste
+getType
+Your Output
+
+An egg has 6.3 gms of protein, 5.3 gms of fats and 0.6 gms of carbohydrates.
+Taste: 7
+Egg is non-vegetarian
+Expected Output [Download]
+
+An egg has 6.3 gms of protein, 5.3 gms of fats and 0.6 gms of carbohydrates.
+Taste: 7
+Egg is non-vegetarian
+Testcase 3: Success
+
+Input [Download]
+
+2
+Bread
+getMacros
+getType
+getTaste
+Egg
+getType
+getMacros
+getTaste
+Your Output
+
+A slice of bread has 4.0 gms of protein, 1.1 gms of fats and 13.8 gms of carbohydrates.
+Bread is vegetarian
+Taste: 8
+Egg is non-vegetarian
+An egg has 6.3 gms of protein, 5.3 gms of fats and 0.6 gms of carbohydrates.
+Taste: 7
+Expected Output [Download]
+
+A slice of bread has 4.0 gms of protein, 1.1 gms of fats and 13.8 gms of carbohydrates.
+Bread is vegetarian
+Taste: 8
+Egg is non-vegetarian
+An egg has 6.3 gms of protein, 5.3 gms of fats and 0.6 gms of carbohydrates.
+Taste: 7
+Testcase 4: Success
+
+Input [Download]
+
+1
+Egg
+getTaste
+getMacros
+getType
+Your Output
+
+Taste: 7
+An egg has 6.3 gms of protein, 5.3 gms of fats and 0.6 gms of carbohydrates.
+Egg is non-vegetarian
+Expected Output [Download]
+
+Taste: 7
+An egg has 6.3 gms of protein, 5.3 gms of fats and 0.6 gms of carbohydrates.
+Egg is non-vegetarian
+Testcase 5: Success
+
+Input [Download]
+
+2
+Bread
+getMacros
+getTaste
+getType
+Egg
+getMacros
+getTaste
+getType
+Your Output
+
+A slice of bread has 4.0 gms of protein, 1.1 gms of fats and 13.8 gms of carbohydrates.
+Taste: 8
+Bread is vegetarian
+An egg has 6.3 gms of protein, 5.3 gms of fats and 0.6 gms of carbohydrates.
+Taste: 7
+Egg is non-vegetarian
+Expected Output [Download]
+
+A slice of bread has 4.0 gms of protein, 1.1 gms of fats and 13.8 gms of carbohydrates.
+Taste: 8
+Bread is vegetarian
+An egg has 6.3 gms of protein, 5.3 gms of fats and 0.6 gms of carbohydrates.
+Taste: 7
+Egg is non-vegetarian
+Testcase 6: Success
+
+Input [Download]
+
+2
+Egg
+getMacros
+getTaste
+getType
+Bread
+getTaste
+getMacros
+getType
+Your Output
+
+An egg has 6.3 gms of protein, 5.3 gms of fats and 0.6 gms of carbohydrates.
+Taste: 7
+Egg is non-vegetarian
+Taste: 8
+A slice of bread has 4.0 gms of protein, 1.1 gms of fats and 13.8 gms of carbohydrates.
+Bread is vegetarian
+Expected Output [Download]
+
+An egg has 6.3 gms of protein, 5.3 gms of fats and 0.6 gms of carbohydrates.
+Taste: 7
+Egg is non-vegetarian
+Taste: 8
+A slice of bread has 4.0 gms of protein, 1.1 gms of fats and 13.8 gms of carbohydrates.
+Bread is vegetarian
